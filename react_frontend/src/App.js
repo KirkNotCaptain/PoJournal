@@ -3,7 +3,8 @@ import "axios";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import LandingPage from "./Components/Landing-Page";
-import Journal from "./Components/Journal";
+import JournalMain from "./Components/Journal-Main";
+import CreateMain from "./Components/Create-Main";
 import PoJournalContext from "./Context";
 
 function App() {
@@ -14,7 +15,9 @@ function App() {
 		if (pageView === "Landing") {
 			return <LandingPage />;
 		} else if (pageView === "Journal") {
-			return <Journal />;
+			return <JournalMain />;
+		} else if (pageView === "Create") {
+			return <CreateMain />;
 		}
 	};
 
