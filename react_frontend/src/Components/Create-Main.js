@@ -3,6 +3,8 @@ import PoJournalContext from "../Context";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
+import CreateDate from "./Create-Date.js";
+import CreateText from "./Create-Text.js";
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -24,14 +26,15 @@ export default function CreateMain() {
 	return (
 		<div>
 			<Button variant="contained" onClick={handleBackBtn}>
-				{" "}
-				Back{" "}
+				Back
 			</Button>
-			<form className={classes.root} noValidate autoComplete="off">
-				<TextField id="standard-basic" label="Standard" />
-				<TextField id="filled-basic" label="Filled" variant="filled" />
-				<TextField id="outlined-basic" label="Outlined" variant="outlined" />
-			</form>
+			<div className="poem-details">
+				<form className={classes.root} noValidate autoComplete="off">
+					<TextField id="standard-basic" label="Write Your Title" />
+				</form>
+				<CreateDate />
+			</div>
+			<CreateText />
 		</div>
 	);
 }
