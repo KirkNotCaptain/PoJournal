@@ -1,15 +1,17 @@
 import "date-fns";
-import React from "react";
+import { format } from "date-fns";
 import Grid from "@material-ui/core/Grid";
 import DateFnsUtils from "@date-io/date-fns";
 import {
 	MuiPickersUtilsProvider,
 	KeyboardDatePicker,
 } from "@material-ui/pickers";
+import { useContext } from "react";
+import PoJournalContext from "../Context";
 
-export default function CreateDate() {
+export default function CreateDate({ setCurrentPoem }) {
 	// The first commit of Material-UI
-	const [selectedDate, setSelectedDate] = React.useState("");
+	const context = useContext(PoJournalContext);
 
 	var currentDate = () => {
 		var today = new Date();
@@ -17,12 +19,22 @@ export default function CreateDate() {
 		var mm = String(today.getMonth() + 1).padStart(2, "0");
 		var yyyy = today.getFullYear();
 
-		today = mm + "/" + dd + "/" + yyyy;
+		today = yyyy + "-" + mm + "-" + dd;
+
+		var newDate = { date: today };
+		var tmp = Object.assign(context.currentPoem, newDate);
+		context.setCurrentPoem(tmp);
+
 		return today;
 	};
 
 	const handleDateChange = (date) => {
-		setSelectedDate(date);
+		var formattedDate = format(new Date(date), "yyyy-MM-dd");
+
+		var newDate = { date: formattedDate };
+		var tmp = Object.assign(context.currentPoem, newDate);
+		context.setCurrentPoem(tmp);
+		console.log("current poem: ", context.currentPoem);
 	};
 
 	return (
