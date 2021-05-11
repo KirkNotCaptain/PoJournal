@@ -1,36 +1,34 @@
-import logo from "./logo.svg";
 import "./App.css";
 import "axios";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import LandingPage from "./Components/Landing-Page";
+import Journal from "./Components/Journal";
+import PoJournalContext from "./Context";
 
 function App() {
-	const [list, setList] = useState([]);
+	const [pageView, setPageView] = useState("Landing");
+	const [allPoems, setAllPoems] = useState([]);
+
+	var renderPage = () => {
+		if (pageView === "Landing") {
+			return <LandingPage />;
+		} else if (pageView === "Journal") {
+			return <Journal />;
+		}
+	};
 
 	useEffect(() => {
 		axios.get("/api/journal").then((data) => {
-			setList(data);
-			console.log(data); //this works - can see the data
+			setAllPoems(data.data);
+			console.log(data.data); //this works - can see the data
 		});
 	}, []);
 
 	return (
-		<div className="App">
-			<header className="App-header">
-				<img src={logo} className="App-logo" alt="logo" />
-				<p>
-					Edit <code>src/App.js</code> and save to reload.
-				</p>
-				<a
-					className="App-link"
-					href="https://reactjs.org"
-					target="_blank"
-					rel="noopener noreferrer"
-				>
-					Learn React
-				</a>
-			</header>
-		</div>
+		<PoJournalContext.Provider value={{ allPoems, pageView, setPageView }}>
+			<div className="App">{renderPage()}</div>
+		</PoJournalContext.Provider>
 	);
 }
 
