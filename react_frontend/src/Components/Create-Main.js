@@ -25,27 +25,33 @@ export default function CreateMain() {
 		context.setPageView("Landing");
 	};
 
-	var handleSave = () => {
+	var handleSubmit = () => {
 		var csrftoken = Cookies.get("csrftoken");
 
-		// , {
-		//   headers: { "X-CSRFToken": csrftoken },
-		// }
-
-		// console.log("CURRENT POEM:", JSON.stringify(context.currentPoem));
+		var newPoem = {
+			title: context.poemTitle,
+			body: context.poemBody,
+			date: context.poemDate,
+		};
+		console.log("New poem: ", newPoem);
 
 		axios
-			.post("api/journal/", JSON.stringify(context.currentPoem), {
+			.post("api/journal/", JSON.stringify(newPoem), {
 				headers: {
 					"Content-Type": "application/json",
 				},
 			})
 			.then((response) => {
 				console.log("post success: ", response);
+				context.setPageView("Landing");
 			})
 			.catch((err) => {
 				console.log("post failue: ", err);
 			});
+	};
+
+	var handleTitle = (event) => {
+		context.setPoemTitle(event.target.value);
 	};
 
 	return (
@@ -53,12 +59,16 @@ export default function CreateMain() {
 			<Button variant="contained" onClick={handleBackBtn}>
 				Back
 			</Button>
-			<Button variant="contained" onClick={handleSave}>
-				Save
+			<Button variant="contained" onClick={handleSubmit}>
+				Submit
 			</Button>
 			<div className="poem-details">
 				<form className={classes.root} noValidate autoComplete="off">
-					<TextField id="standard-basic" label="Write Your Title" />
+					<TextField
+						id="standard-basic"
+						label="Write Your Title"
+						onChange={handleTitle}
+					/>
 				</form>
 				<CreateDate />
 			</div>

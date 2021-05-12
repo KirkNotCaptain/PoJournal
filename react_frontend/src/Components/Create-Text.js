@@ -1,4 +1,5 @@
-import React from "react";
+import { useContext, useState } from "react";
+import PoJournalContext from "../Context";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 
@@ -13,10 +14,13 @@ const useStyles = makeStyles((theme) => ({
 
 export default function CreateText() {
 	const classes = useStyles();
-	const [value, setValue] = React.useState("Controlled");
+	// const [value, setValue] = useState("Controlled");
+	const context = useContext(PoJournalContext);
 
 	const handleChange = (event) => {
-		setValue(event.target.value);
+		// console.log(event.target.value);
+		context.setPoemBody(event.target.value);
+		// setValue(event.target.value);
 	};
 
 	return (
@@ -29,6 +33,7 @@ export default function CreateText() {
 					rows={4}
 					defaultValue="Start Writing"
 					variant="outlined"
+					onChange={handleChange}
 				/>
 			</div>
 		</form>

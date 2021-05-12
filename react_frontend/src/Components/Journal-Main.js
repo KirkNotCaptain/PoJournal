@@ -1,6 +1,6 @@
 import JournalTable from "./Journal-Table";
 import Button from "@material-ui/core/Button";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import PoJournalContext from "../Context";
 
 const JournalMain = () => {

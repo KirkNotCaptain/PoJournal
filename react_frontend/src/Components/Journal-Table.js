@@ -10,6 +10,7 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
+import axios from "axios";
 
 const useStyles = makeStyles({
 	table: {
@@ -33,6 +34,19 @@ export default function JournalTable() {
 	const classes = useStyles();
 	const context = useContext(PoJournalContext);
 
+	var handleDelete = (poem) => {
+		console.log("delete request received");
+		axios
+			.delete(`api/journal/${poem.id}/`)
+			.then((res) => {
+				console.log("delete successful: ", res);
+				context.setUpdate(!context.update);
+			})
+			.catch((err) => {
+				console.log("delete uncessfull,", err);
+			});
+	};
+
 	return (
 		<TableContainer component={Paper}>
 			<Table className={classes.table} aria-label="simple table">
@@ -45,17 +59,21 @@ export default function JournalTable() {
 					</TableRow>
 				</TableHead>
 				<TableBody>
-					{context.allPoems.map((entry) => (
-						<TableRow key={entry.name}>
+					{context.allPoems.map((poem) => (
+						<TableRow key={poem.name}>
 							<TableCell component="th" scope="row">
-								{entry.title}
+								{poem.title}
 							</TableCell>
-							<TableCell align="right">{entry.date}</TableCell>
+							<TableCell align="right">{poem.date}</TableCell>
 							<TableCell align="right">
 								<EditIcon />
 							</TableCell>
 							<TableCell align="right">
-								<DeleteIcon />
+								<DeleteIcon
+									onClick={() => {
+										handleDelete(poem);
+									}}
+								/>
 							</TableCell>
 						</TableRow>
 					))}

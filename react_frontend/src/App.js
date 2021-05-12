@@ -11,13 +11,10 @@ import PoJournalContext from "./Context";
 function App() {
 	const [pageView, setPageView] = useState("Landing");
 	const [allPoems, setAllPoems] = useState([]);
-	const [currentPoem, setCurrentPoem] = useState({
-		title: "Untitled",
-		body: "",
-		date: "",
-	});
-
-	console.log("current poem: ", currentPoem);
+	const [poemBody, setPoemBody] = useState("");
+	const [poemTitle, setPoemTitle] = useState("Untitled");
+	const [poemDate, setPoemDate] = useState("");
+	const [update, setUpdate] = useState(true);
 
 	var renderPage = () => {
 		if (pageView === "Landing") {
@@ -34,11 +31,23 @@ function App() {
 			setAllPoems(data.data);
 			console.log(data.data); //this works - can see the data
 		});
-	}, []);
+	}, [update]);
 
 	return (
 		<PoJournalContext.Provider
-			value={{ allPoems, pageView, setPageView, currentPoem, setCurrentPoem }}
+			value={{
+				allPoems,
+				pageView,
+				setPageView,
+				poemBody,
+				setPoemBody,
+				poemTitle,
+				setPoemTitle,
+				poemDate,
+				setPoemDate,
+				update,
+				setUpdate,
+			}}
 		>
 			<div className="App">{renderPage()}</div>
 		</PoJournalContext.Provider>

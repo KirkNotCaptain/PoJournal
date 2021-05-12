@@ -5,12 +5,14 @@ const PoJournalContext = createContext({
 	setAllPoems: () => {},
 	pageView: "Landing",
 	setPageView: (p) => {},
-	currentPoem: {
-		title: "Untitled",
-		body: "",
-		date: "",
-	},
-	setCurrentPoem: () => {},
+	poemBody: "",
+	setPoemBody: () => {},
+	poemTitle: "",
+	setPoemTitle: () => {},
+	poemDate: "",
+	setPoemDate: () => {},
+	update: true,
+	setUpdate: () => {},
 });
 
 export default PoJournalContext;

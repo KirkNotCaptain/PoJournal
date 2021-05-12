@@ -9,7 +9,7 @@ import {
 import { useContext, useState } from "react";
 import PoJournalContext from "../Context";
 
-export default function CreateDate({ setCurrentPoem }) {
+export default function CreateDate() {
 	// The first commit of Material-UI
 	const context = useContext(PoJournalContext);
 	const [selectedDate, setSelectedDate] = useState("2021-05-11T21:11:54");
@@ -24,7 +24,8 @@ export default function CreateDate({ setCurrentPoem }) {
 
 		var newDate = { date: today };
 		var tmp = Object.assign(context.currentPoem, newDate);
-		context.setCurrentPoem(tmp);
+		// context.setCurrentPoem(tmp);
+		context.setPoemDate(tmp);
 
 		return today;
 	};
@@ -32,9 +33,7 @@ export default function CreateDate({ setCurrentPoem }) {
 	const handleDateChange = (date) => {
 		var formattedDate = format(new Date(date), "yyyy-MM-dd");
 
-		var newDate = { date: formattedDate };
-		var tmp = Object.assign(context.currentPoem, newDate);
-		context.setCurrentPoem(tmp);
+		context.setPoemDate(formattedDate);
 		setSelectedDate(formattedDate);
 		console.log("current poem: ", context.currentPoem);
 	};
