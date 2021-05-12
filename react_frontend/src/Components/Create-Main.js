@@ -35,19 +35,11 @@ export default function CreateMain() {
 		// console.log("CURRENT POEM:", JSON.stringify(context.currentPoem));
 
 		axios
-			.post(
-				"api/journal/",
-				JSON.stringify({
-					title: "Example",
-					body: "something",
-					date: "2021-05-11",
-				}),
-				{
-					headers: {
-						"Content-Type": "application/json",
-					},
-				}
-			)
+			.post("api/journal/", JSON.stringify(context.currentPoem), {
+				headers: {
+					"Content-Type": "application/json",
+				},
+			})
 			.then((response) => {
 				console.log("post success: ", response);
 			})

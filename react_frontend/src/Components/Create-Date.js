@@ -6,12 +6,13 @@ import {
 	MuiPickersUtilsProvider,
 	KeyboardDatePicker,
 } from "@material-ui/pickers";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import PoJournalContext from "../Context";
 
 export default function CreateDate({ setCurrentPoem }) {
 	// The first commit of Material-UI
 	const context = useContext(PoJournalContext);
+	const [selectedDate, setSelectedDate] = useState("2021-05-11T21:11:54");
 
 	var currentDate = () => {
 		var today = new Date();
@@ -34,6 +35,7 @@ export default function CreateDate({ setCurrentPoem }) {
 		var newDate = { date: formattedDate };
 		var tmp = Object.assign(context.currentPoem, newDate);
 		context.setCurrentPoem(tmp);
+		setSelectedDate(formattedDate);
 		console.log("current poem: ", context.currentPoem);
 	};
 
@@ -47,7 +49,7 @@ export default function CreateDate({ setCurrentPoem }) {
 					margin="normal"
 					id="date-picker-inline"
 					label="Select Date Created"
-					value={currentDate()}
+					value={selectedDate}
 					onChange={handleDateChange}
 					KeyboardButtonProps={{
 						"aria-label": "change date",
