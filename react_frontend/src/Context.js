@@ -13,6 +13,8 @@ const PoJournalContext = createContext({
 	setPoemDate: () => {},
 	update: true,
 	setUpdate: () => {},
+	editPoem: {},
+	setEditPoem: () => {},
 });
 
 export default PoJournalContext;

@@ -47,6 +47,11 @@ export default function JournalTable() {
 			});
 	};
 
+	var handleEdit = (poem) => {
+		context.setEditPoem(poem);
+		context.setPageView("Edit");
+	};
+
 	return (
 		<TableContainer component={Paper}>
 			<Table className={classes.table} aria-label="simple table">
@@ -66,7 +71,11 @@ export default function JournalTable() {
 							</TableCell>
 							<TableCell align="right">{poem.date}</TableCell>
 							<TableCell align="right">
-								<EditIcon />
+								<EditIcon
+									onClick={() => {
+										handleEdit(poem);
+									}}
+								/>
 							</TableCell>
 							<TableCell align="right">
 								<DeleteIcon

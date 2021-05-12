@@ -6,6 +6,7 @@ import axios from "axios";
 import LandingPage from "./Components/Landing-Page";
 import JournalMain from "./Components/Journal-Main";
 import CreateMain from "./Components/Create-Main";
+import EditMain from "./Components/Edit-Main";
 import PoJournalContext from "./Context";
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
 	const [poemTitle, setPoemTitle] = useState("Untitled");
 	const [poemDate, setPoemDate] = useState("");
 	const [update, setUpdate] = useState(true);
+	const [editPoem, setEditPoem] = useState({});
 
 	var renderPage = () => {
 		if (pageView === "Landing") {
@@ -23,13 +25,15 @@ function App() {
 			return <JournalMain />;
 		} else if (pageView === "Create") {
 			return <CreateMain />;
+		} else if (pageView === "Edit") {
+			return <EditMain />;
 		}
 	};
 
 	useEffect(() => {
 		axios.get("/api/journal/").then((data) => {
 			setAllPoems(data.data);
-			console.log(data.data); //this works - can see the data
+			//console.log(data.data);
 		});
 	}, [update]);
 
@@ -47,6 +51,8 @@ function App() {
 				setPoemDate,
 				update,
 				setUpdate,
+				editPoem,
+				setEditPoem,
 			}}
 		>
 			<div className="App">{renderPage()}</div>
