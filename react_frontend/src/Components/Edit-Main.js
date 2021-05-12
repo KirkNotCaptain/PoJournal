@@ -25,24 +25,25 @@ export default function CreateMain() {
 		context.setPageView("Landing");
 	};
 
-	var handleSubmit = () => {
+	var handleEditSubmit = () => {
 		var csrftoken = Cookies.get("csrftoken");
 
 		var newPoem = {
-			title: context.poemTitle,
-			body: context.poemBody,
-			date: context.poemDate,
+			title: context.editPoemTitle,
+			body: context.editPoemBody,
+			date: context.editPoemDate,
 		};
 		console.log("New poem: ", newPoem);
 
 		axios
-			.post("api/journal/", JSON.stringify(newPoem), {
+			.put(`api/journal/${context.editPoemID}/`, JSON.stringify(newPoem), {
 				headers: {
 					"Content-Type": "application/json",
 				},
 			})
 			.then((response) => {
 				console.log("post success: ", response);
+				context.setUpdate(!context.update);
 				context.setPageView("Landing");
 			})
 			.catch((err) => {
@@ -51,7 +52,7 @@ export default function CreateMain() {
 	};
 
 	var handleTitle = (event) => {
-		context.setPoemTitle(event.target.value);
+		context.setEditPoemTitle(event.target.value);
 	};
 
 	return (
@@ -59,7 +60,7 @@ export default function CreateMain() {
 			<Button variant="contained" onClick={handleBackBtn}>
 				Back
 			</Button>
-			<Button variant="contained" onClick={handleSubmit}>
+			<Button variant="contained" onClick={handleEditSubmit}>
 				Submit
 			</Button>
 			<div className="poem-details">

@@ -19,7 +19,7 @@ export default function EditText() {
 
 	const handleChange = (event) => {
 		// console.log(event.target.value);
-		context.setPoemBody(event.target.value);
+		context.setEditPoemBody(event.target.value);
 		// setValue(event.target.value);
 	};
 
@@ -31,7 +31,7 @@ export default function EditText() {
 					label="Your New Poem"
 					multiline
 					rows={4}
-					defaultValue={context.editPoem.body}
+					defaultValue={context.editPoemBody}
 					variant="outlined"
 					onChange={handleChange}
 				/>

@@ -49,6 +49,10 @@ export default function JournalTable() {
 
 	var handleEdit = (poem) => {
 		context.setEditPoem(poem);
+		context.setEditPoemBody(poem.body);
+		context.setEditPoemTitle(poem.title);
+		context.setEditPoemDate(poem.date);
+		context.setEditPoemID(poem.id);
 		context.setPageView("Edit");
 	};
 

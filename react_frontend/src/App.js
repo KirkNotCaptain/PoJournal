@@ -16,7 +16,10 @@ function App() {
 	const [poemTitle, setPoemTitle] = useState("Untitled");
 	const [poemDate, setPoemDate] = useState("");
 	const [update, setUpdate] = useState(true);
-	const [editPoem, setEditPoem] = useState({});
+	const [editPoemBody, setEditPoemBody] = useState("");
+	const [editPoemTitle, setEditPoemTitle] = useState("");
+	const [editPoemDate, setEditPoemDate] = useState("");
+	const [editPoemID, setEditPoemID] = useState(0);
 
 	var renderPage = () => {
 		if (pageView === "Landing") {
@@ -51,8 +54,14 @@ function App() {
 				setPoemDate,
 				update,
 				setUpdate,
-				editPoem,
-				setEditPoem,
+				editPoemBody,
+				setEditPoemBody,
+				editPoemTitle,
+				setEditPoemTitle,
+				editPoemDate,
+				setEditPoemDate,
+				editPoemID,
+				setEditPoemID,
 			}}
 		>
 			<div className="App">{renderPage()}</div>

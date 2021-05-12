@@ -33,9 +33,9 @@ export default function EditDate() {
 	const handleDateChange = (date) => {
 		var formattedDate = format(new Date(date), "yyyy-MM-dd");
 
-		context.setPoemDate(formattedDate);
-		setSelectedDate(formattedDate);
-		console.log("current poem: ", context.currentPoem);
+		context.setEditPoemDate(formattedDate);
+		// setSelectedDate(formattedDate);
+		// console.log("current poem: ", context.currentPoem);
 	};
 
 	return (
@@ -48,7 +48,7 @@ export default function EditDate() {
 					margin="normal"
 					id="date-picker-inline"
 					label="Select Date Created"
-					value={context.editPoem.date}
+					value={context.editPoemDate}
 					onChange={handleDateChange}
 					KeyboardButtonProps={{
 						"aria-label": "change date",
