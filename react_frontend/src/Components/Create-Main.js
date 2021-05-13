@@ -1,13 +1,14 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import PoJournalContext from "../Context";
 import { makeStyles, ThemeProvider } from "@material-ui/core/styles";
-import { cursiveTheme } from "../Themes";
+import { cursiveTheme, typeWriterTheme } from "../Themes";
+import ThemeButtons from "./Theme-Buttons";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import CreateDate from "./Create-Date.js";
 import CreateText from "./Create-Text.js";
 import axios from "axios";
-import Cookies from "js-cookie";
+// import Cookies from "js-cookie";
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -24,6 +25,19 @@ const useStyles = makeStyles((theme) => ({
 export default function CreateMain() {
 	const classes = useStyles();
 	const context = useContext(PoJournalContext);
+	const [theme, setTheme] = useState("cursive");
+
+	console.log("rerender!");
+
+	useEffect(() => {}, [theme]);
+
+	var handleTheme = () => {
+		if (theme === "cursive") {
+			return cursiveTheme;
+		} else if (theme === "typewriter") {
+			return typeWriterTheme;
+		}
+	};
 
 	var handleBackBtn = () => {
 		context.setPageView("Landing");
@@ -60,7 +74,7 @@ export default function CreateMain() {
 	};
 
 	return (
-		<ThemeProvider theme={cursiveTheme}>
+		<ThemeProvider theme={handleTheme()}>
 			<div>
 				<div className="create-main-buttons">
 					<Button variant="contained" onClick={handleBackBtn}>
@@ -70,6 +84,7 @@ export default function CreateMain() {
 						Submit
 					</Button>
 				</div>
+				<ThemeButtons setTheme={setTheme} />
 				<div className="poem-details">
 					<form className={classes.root} noValidate autoComplete="off">
 						<TextField

@@ -35,7 +35,6 @@ export default function CreateText() {
 					label="Your New Poem"
 					multiline
 					rows={4}
-					defaultValue="Start Writing"
 					variant="outlined"
 					onChange={handleChange}
 				/>

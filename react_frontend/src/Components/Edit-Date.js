@@ -50,7 +50,9 @@ export default function EditDate() {
 					id="date-picker-inline"
 					label="Select Date Created"
 					value={context.editPoemDate}
-					onChange={handleDateChange}
+					onChange={() => {
+						handleDateChange();
+					}}
 					KeyboardButtonProps={{
 						"aria-label": "change date",
 					}}

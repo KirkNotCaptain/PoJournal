@@ -1,6 +1,5 @@
 import "./App.css";
 import "axios";
-
 import { useState, useEffect } from "react";
 import axios from "axios";
 import LandingPage from "./Components/Landing-Page";
@@ -8,6 +7,9 @@ import JournalMain from "./Components/Journal-Main";
 import CreateMain from "./Components/Create-Main";
 import EditMain from "./Components/Edit-Main";
 import PoJournalContext from "./Context";
+
+// import { ThemeProvider } from '@material-ui/core/styles'
+// import {cursiveTheme } from './Themes'
 
 function App() {
 	const [pageView, setPageView] = useState("Landing");
