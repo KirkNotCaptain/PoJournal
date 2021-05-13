@@ -1,7 +1,11 @@
 html {
 	text-align: center;
-	background-color: #282c34;
-	color: white;
+	background-color: beige;
+	color: black;
+}
+
+* {
+	font-family: cursive;
 }
 
 .App-header {
@@ -19,8 +23,32 @@ html {
 
 .start-writing-btn,
 .see-journal-btn {
-	border: 1px solid white;
-	width: 500px;
+	border: 2px solid black;
+	border-radius: 30px;
+	width: 50%;
+	height: 100px;
 	padding: 25px;
-	margin: 100px;
+	margin: auto;
+	text-align: center;
+	cursor: pointer;
+}
+
+h1 {
+	width: 50%;
+	margin: auto;
+}
+
+.create-main-buttons {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+}
+
+.title {
+	border-bottom: 1px solid black;
+	margin-bottom: 0;
+}
+
+.subtitle {
+	margin-top: 0;
 }

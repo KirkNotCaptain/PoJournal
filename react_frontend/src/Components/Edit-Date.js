@@ -32,6 +32,7 @@ export default function EditDate() {
 
 	const handleDateChange = (date) => {
 		var formattedDate = format(new Date(date), "yyyy-MM-dd");
+		console.log("FORMATTED DATE: ", formattedDate);
 
 		context.setEditPoemDate(formattedDate);
 		// setSelectedDate(formattedDate);

@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import PoJournalContext from "../Context";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, ThemeProvider } from "@material-ui/core/styles";
+import { cursiveTheme } from "../Themes";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import CreateDate from "./Create-Date.js";
@@ -15,6 +16,9 @@ const useStyles = makeStyles((theme) => ({
 			width: "25ch",
 		},
 	},
+	typography: {
+		fontFamily: "Cursive",
+	},
 }));
 
 export default function CreateMain() {
@@ -26,7 +30,7 @@ export default function CreateMain() {
 	};
 
 	var handleSubmit = () => {
-		var csrftoken = Cookies.get("csrftoken");
+		// var csrftoken = Cookies.get("csrftoken");
 
 		var newPoem = {
 			title: context.poemTitle,
@@ -43,6 +47,7 @@ export default function CreateMain() {
 			})
 			.then((response) => {
 				console.log("post success: ", response);
+				context.setUpdate(!context.update);
 				context.setPageView("Landing");
 			})
 			.catch((err) => {
@@ -55,24 +60,29 @@ export default function CreateMain() {
 	};
 
 	return (
-		<div>
-			<Button variant="contained" onClick={handleBackBtn}>
-				Back
-			</Button>
-			<Button variant="contained" onClick={handleSubmit}>
-				Submit
-			</Button>
-			<div className="poem-details">
-				<form className={classes.root} noValidate autoComplete="off">
-					<TextField
-						id="standard-basic"
-						label="Write Your Title"
-						onChange={handleTitle}
-					/>
-				</form>
-				<CreateDate />
+		<ThemeProvider theme={cursiveTheme}>
+			<div>
+				<div className="create-main-buttons">
+					<Button variant="contained" onClick={handleBackBtn}>
+						Back
+					</Button>
+					<Button variant="contained" onClick={handleSubmit}>
+						Submit
+					</Button>
+				</div>
+				<div className="poem-details">
+					<form className={classes.root} noValidate autoComplete="off">
+						<TextField
+							id="standard-basic"
+							label="Write Your Title"
+							onChange={handleTitle}
+							className={classes.typography}
+						/>
+					</form>
+					<CreateDate />
+				</div>
+				<CreateText />
 			</div>
-			<CreateText />
-		</div>
+		</ThemeProvider>
 	);
 }

@@ -1,6 +1,6 @@
 import PoJournalContext from "../Context";
 import { useContext } from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, ThemeProvider } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
@@ -10,11 +10,19 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
+import DeleteModal from "./Delete-Modal";
 import axios from "axios";
+import { cursiveTheme } from "../Themes";
 
 const useStyles = makeStyles({
 	table: {
 		minWidth: 650,
+		background: "beige",
+	},
+	button: {
+		"&:hover": {
+			cursor: "pointer",
+		},
 	},
 });
 
@@ -35,7 +43,6 @@ export default function JournalTable() {
 	const context = useContext(PoJournalContext);
 
 	var handleDelete = (poem) => {
-		console.log("delete request received");
 		axios
 			.delete(`api/journal/${poem.id}/`)
 			.then((res) => {
@@ -48,7 +55,6 @@ export default function JournalTable() {
 	};
 
 	var handleEdit = (poem) => {
-		context.setEditPoem(poem);
 		context.setEditPoemBody(poem.body);
 		context.setEditPoemTitle(poem.title);
 		context.setEditPoemDate(poem.date);
@@ -57,41 +63,45 @@ export default function JournalTable() {
 	};
 
 	return (
-		<TableContainer component={Paper}>
-			<Table className={classes.table} aria-label="simple table">
-				<TableHead>
-					<TableRow>
-						<TableCell>Title</TableCell>
-						<TableCell align="right">Date Last Modified</TableCell>
-						<TableCell align="right">View/Edit</TableCell>
-						<TableCell align="right">Delete</TableCell>
-					</TableRow>
-				</TableHead>
-				<TableBody>
-					{context.allPoems.map((poem) => (
-						<TableRow key={poem.name}>
-							<TableCell component="th" scope="row">
-								{poem.title}
-							</TableCell>
-							<TableCell align="right">{poem.date}</TableCell>
-							<TableCell align="right">
-								<EditIcon
-									onClick={() => {
-										handleEdit(poem);
-									}}
-								/>
-							</TableCell>
-							<TableCell align="right">
-								<DeleteIcon
-									onClick={() => {
-										handleDelete(poem);
-									}}
-								/>
-							</TableCell>
+		<ThemeProvider theme={cursiveTheme}>
+			<TableContainer component={Paper}>
+				<Table className={classes.table} aria-label="simple table">
+					<TableHead>
+						<TableRow>
+							<TableCell>Title</TableCell>
+							<TableCell align="right">Date Last Modified</TableCell>
+							<TableCell align="right">View/Edit</TableCell>
+							<TableCell align="right">Delete</TableCell>
 						</TableRow>
-					))}
-				</TableBody>
-			</Table>
-		</TableContainer>
+					</TableHead>
+					<TableBody>
+						{context.allPoems.map((poem) => (
+							<TableRow key={poem.name}>
+								<TableCell component="th" scope="row">
+									{poem.title}
+								</TableCell>
+								<TableCell align="right">{poem.date}</TableCell>
+								<TableCell align="right">
+									<EditIcon
+										onClick={() => {
+											handleEdit(poem);
+										}}
+										className={classes.button}
+									/>
+								</TableCell>
+								<TableCell align="right">
+									<DeleteIcon
+										onClick={() => {
+											handleDelete(poem);
+										}}
+										className={classes.button}
+									/>
+								</TableCell>
+							</TableRow>
+						))}
+					</TableBody>
+				</Table>
+			</TableContainer>
+		</ThemeProvider>
 	);
 }

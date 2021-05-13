@@ -10,17 +10,19 @@ const LandingPage = () => {
 
 	return (
 		<header className="App-header">
+			<h1 className="title"> PoeJournal </h1>
+			<h2 className="subtitle"> A Simple Poem Editor</h2>
 			<div
 				className="start-writing-btn"
 				onClick={() => handlePageView("Create")}
 			>
-				Start Writing{" "}
+				<h1> Start Writing </h1>
 			</div>
 			<div
 				className="see-journal-btn"
 				onClick={() => handlePageView("Journal")}
 			>
-				View Journal{" "}
+				<h1> View Journal </h1>
 			</div>
 		</header>
 	);

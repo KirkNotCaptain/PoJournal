@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import PoJournalContext from "../Context";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, ThemeProvider } from "@material-ui/core/styles";
+import { cursiveTheme } from "../Themes";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import EditDate from "./Edit-Date.js";
@@ -56,24 +57,26 @@ export default function CreateMain() {
 	};
 
 	return (
-		<div>
-			<Button variant="contained" onClick={handleBackBtn}>
-				Back
-			</Button>
-			<Button variant="contained" onClick={handleEditSubmit}>
-				Submit
-			</Button>
-			<div className="poem-details">
-				<form className={classes.root} noValidate autoComplete="off">
-					<TextField
-						id="standard-basic"
-						label={context.editPoem.title}
-						onChange={handleTitle}
-					/>
-				</form>
-				<EditDate />
+		<ThemeProvider theme={cursiveTheme}>
+			<div>
+				<Button variant="contained" onClick={handleBackBtn}>
+					Back
+				</Button>
+				<Button variant="contained" onClick={handleEditSubmit}>
+					Submit
+				</Button>
+				<div className="poem-details">
+					<form className={classes.root} noValidate autoComplete="off">
+						<TextField
+							id="standard-basic"
+							label={context.editPoemTitle}
+							onChange={handleTitle}
+						/>
+					</form>
+					<EditDate />
+				</div>
+				<EditText />
 			</div>
-			<EditText />
-		</div>
+		</ThemeProvider>
 	);
 }
