@@ -21,6 +21,8 @@ const PoJournalContext = createContext({
 	setEditPoemDate: () => {},
 	editPoemID: 0,
 	setEditPoemID: () => {},
+	createTheme: "cursive",
+	setCreateTheme: () => {},
 });
 
 export default PoJournalContext;

@@ -20,7 +20,8 @@ export default function ThemeButtons({ setTheme }) {
 	const context = useContext(PoJournalContext);
 
 	var handleThemeChange = (newTheme) => {
-		setTheme(newTheme);
+		// setTheme(newTheme);
+		context.setCreateTheme(newTheme);
 		// context.setUpdate(!context.update);
 	};
 

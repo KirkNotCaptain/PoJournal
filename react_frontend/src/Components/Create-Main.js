@@ -29,12 +29,13 @@ export default function CreateMain() {
 
 	console.log("rerender!");
 
-	useEffect(() => {}, [theme]);
+	useEffect(() => {}, [context.createTheme]);
 
 	var handleTheme = () => {
-		if (theme === "cursive") {
+		console.log("current Theme: ", context.createTheme);
+		if (context.createTheme === "cursive") {
 			return cursiveTheme;
-		} else if (theme === "typewriter") {
+		} else if (context.createTheme === "typewriter") {
 			return typeWriterTheme;
 		}
 	};
@@ -84,7 +85,7 @@ export default function CreateMain() {
 						Submit
 					</Button>
 				</div>
-				<ThemeButtons setTheme={setTheme} />
+				<ThemeButtons />
 				<div className="poem-details">
 					<form className={classes.root} noValidate autoComplete="off">
 						<TextField

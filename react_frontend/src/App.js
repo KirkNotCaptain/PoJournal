@@ -22,6 +22,7 @@ function App() {
 	const [editPoemTitle, setEditPoemTitle] = useState("");
 	const [editPoemDate, setEditPoemDate] = useState("");
 	const [editPoemID, setEditPoemID] = useState(0);
+	const [createTheme, setCreateTheme] = useState("cursive");
 
 	var renderPage = () => {
 		if (pageView === "Landing") {
@@ -64,6 +65,8 @@ function App() {
 				setEditPoemDate,
 				editPoemID,
 				setEditPoemID,
+				createTheme,
+				setCreateTheme,
 			}}
 		>
 			<div className="App">{renderPage()}</div>
