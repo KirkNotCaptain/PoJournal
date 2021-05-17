@@ -1,6 +1,10 @@
 import { useContext, useState, useEffect } from "react";
 import PoJournalContext from "../Context";
-import { makeStyles, ThemeProvider } from "@material-ui/core/styles";
+import {
+	makeStyles,
+	ThemeProvider,
+	MuiThemeProvider,
+} from "@material-ui/core/styles";
 import { cursiveTheme, typeWriterTheme } from "../Themes";
 import ThemeButtons from "./Theme-Buttons";
 import TextField from "@material-ui/core/TextField";
@@ -25,17 +29,20 @@ const useStyles = makeStyles((theme) => ({
 export default function CreateMain() {
 	const classes = useStyles();
 	const context = useContext(PoJournalContext);
-	const [theme, setTheme] = useState("cursive");
+	// const [theme, setTheme] = useState("cursive");
+
+	const theme = context.createTheme;
+	console.log("theme: ", theme);
 
 	console.log("rerender!");
 
 	useEffect(() => {}, [context.createTheme]);
 
 	var handleTheme = () => {
-		console.log("current Theme: ", context.createTheme);
-		if (context.createTheme === "cursive") {
+		// console.log("current Theme: ", context.createTheme);
+		if (theme === "cursive") {
 			return cursiveTheme;
-		} else if (context.createTheme === "typewriter") {
+		} else if (theme === "typewriter") {
 			return typeWriterTheme;
 		}
 	};
@@ -75,7 +82,7 @@ export default function CreateMain() {
 	};
 
 	return (
-		<ThemeProvider theme={handleTheme()}>
+		<MuiThemeProvider theme={handleTheme()}>
 			<div>
 				<div className="create-main-buttons">
 					<Button variant="contained" onClick={handleBackBtn}>
@@ -99,6 +106,6 @@ export default function CreateMain() {
 				</div>
 				<CreateText />
 			</div>
-		</ThemeProvider>
+		</MuiThemeProvider>
 	);
 }
