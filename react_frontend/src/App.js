@@ -43,38 +43,6 @@ function App() {
 		});
 	}, [update]);
 
-	return (
-		<PoJournalContext.Provider
-			value={{
-				allPoems,
-				pageView,
-				setPageView,
-				poemBody,
-				setPoemBody,
-				poemTitle,
-				setPoemTitle,
-				poemDate,
-				setPoemDate,
-				update,
-				setUpdate,
-				editPoemBody,
-				setEditPoemBody,
-				editPoemTitle,
-				setEditPoemTitle,
-				editPoemDate,
-				setEditPoemDate,
-				editPoemID,
-				setEditPoemID,
-				createTheme,
-				setCreateTheme,
-			}}
-		>
-			<div className="App">
-				<LandingPage />
-			</div>
-		</PoJournalContext.Provider>
-	);
-
 	// return (
 	// 	<PoJournalContext.Provider
 	// 		value={{
@@ -101,9 +69,41 @@ function App() {
 	// 			setCreateTheme,
 	// 		}}
 	// 	>
-	// 		<div className="App">{renderPage()}</div>
+	// 		<div className="App">
+	// 			<LandingPage />
+	// 		</div>
 	// 	</PoJournalContext.Provider>
 	// );
+
+	return (
+		<PoJournalContext.Provider
+			value={{
+				allPoems,
+				pageView,
+				setPageView,
+				poemBody,
+				setPoemBody,
+				poemTitle,
+				setPoemTitle,
+				poemDate,
+				setPoemDate,
+				update,
+				setUpdate,
+				editPoemBody,
+				setEditPoemBody,
+				editPoemTitle,
+				setEditPoemTitle,
+				editPoemDate,
+				setEditPoemDate,
+				editPoemID,
+				setEditPoemID,
+				createTheme,
+				setCreateTheme,
+			}}
+		>
+			<div className="App">{renderPage()}</div>
+		</PoJournalContext.Provider>
+	);
 }
 
 export default App;

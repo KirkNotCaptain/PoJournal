@@ -1,4 +1,5 @@
 import { createContext } from "react";
+import { cursiveTheme } from "./Themes";
 
 const PoJournalContext = createContext({
 	allPoems: [],
@@ -21,7 +22,7 @@ const PoJournalContext = createContext({
 	setEditPoemDate: () => {},
 	editPoemID: 0,
 	setEditPoemID: () => {},
-	createTheme: "cursive",
+	createTheme: cursiveTheme,
 	setCreateTheme: () => {},
 });
 

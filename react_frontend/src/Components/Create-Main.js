@@ -82,7 +82,7 @@ export default function CreateMain() {
 	};
 
 	return (
-		<MuiThemeProvider theme={handleTheme()}>
+		<MuiThemeProvider theme={context.createTheme}>
 			<div>
 				<div className="create-main-buttons">
 					<Button variant="contained" onClick={handleBackBtn}>
@@ -108,4 +108,32 @@ export default function CreateMain() {
 			</div>
 		</MuiThemeProvider>
 	);
+
+	// return (
+	// 	<MuiThemeProvider theme={handleTheme()}>
+	// 		<div>
+	// 			<div className="create-main-buttons">
+	// 				<Button variant="contained" onClick={handleBackBtn}>
+	// 					Back
+	// 				</Button>
+	// 				<Button variant="contained" onClick={handleSubmit}>
+	// 					Submit
+	// 				</Button>
+	// 			</div>
+	// 			<ThemeButtons />
+	// 			<div className="poem-details">
+	// 				<form className={classes.root} noValidate autoComplete="off">
+	// 					<TextField
+	// 						id="standard-basic"
+	// 						label="Write Your Title"
+	// 						onChange={handleTitle}
+	// 						className={classes.typography}
+	// 					/>
+	// 				</form>
+	// 				<CreateDate />
+	// 			</div>
+	// 			<CreateText />
+	// 		</div>
+	// 	</MuiThemeProvider>
+	// );
 }
